@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HLW 彩色字母</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+        
+        .hlw-container {
+            font-size: 20vw; /* 响应式大字体 */
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        .h {
+            color: #FF6B6B; /* 红色 */
+        }
+        
+        .l {
+            color: #4ECDC4; /* 青绿色 */
+        }
+        
+        .w {
+            color: #45B7D1; /* 蓝色 */
+        }
+        
+        /* 额外的动画效果（可选） */
+        .hlw-container span {
+            display: inline-block;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .l {
+            animation-delay: 0.5s;
+        }
+        
+        .w {
+            animation-delay: 1s;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hlw-container">
+        <span class="h">H</span>
+        <span class="l">L</span>
+        <span class="w">W</span>
+    </div>
+</body>
+</html>
