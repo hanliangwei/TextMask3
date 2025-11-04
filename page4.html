@@ -3,66 +3,130 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HLW 彩色字母</title>
+    <title>励志弹幕</title>
     <style>
         body {
             margin: 0;
             padding: 0;
             height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #f0f0f0;
-            font-family: Arial, sans-serif;
+            background-image: url('http://img.netbian.com/file/2024/0306/171556BZqcz.jpg');
+            background-size: cover;
+            background-position: center;
+            overflow: hidden;
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
         }
         
-        .hlw-container {
-            font-size: 20vw; /* 响应式大字体 */
+        #container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .barrage {
+            position: absolute;
+            white-space: nowrap;
+            padding: 8px 16px;
+            border-radius: 20px;
+            color: white;
             font-weight: bold;
-            text-align: center;
+            font-size: 16px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            opacity: 0.9;
+            user-select: none;
+            animation-duration: var(--duration);
+            animation-name: move;
+            animation-timing-function: linear;
+            animation-fill-mode: forwards;
         }
         
-        .h {
-            color: #FF6B6B; /* 红色 */
-        }
-        
-        .l {
-            color: #4ECDC4; /* 青绿色 */
-        }
-        
-        .w {
-            color: #45B7D1; /* 蓝色 */
-        }
-        
-        /* 额外的动画效果（可选） */
-        .hlw-container span {
-            display: inline-block;
-            animation: float 3s ease-in-out infinite;
-        }
-        
-        .l {
-            animation-delay: 0.5s;
-        }
-        
-        .w {
-            animation-delay: 1s;
-        }
-        
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0);
+        @keyframes move {
+            from {
+                transform: translateX(100vw);
             }
-            50% {
-                transform: translateY(-10px);
+            to {
+                transform: translateX(-100%);
             }
         }
     </style>
 </head>
 <body>
-    <div class="hlw-container">
-        <span class="h">H</span>
-        <span class="l">L</span>
-        <span class="w">W</span>
-    </div>
+    <div id="container"></div>
+
+    <script>
+        const container = document.getElementById('container');
+        const motivationalTexts = [
+            '天道酬勤', '自强不息', '厚德载物', '志存高远', '勇往直前',
+            '百折不挠', '滴水穿石', '破釜沉舟', '卧薪尝胆', '自强不息',
+            '厚德载物', '知行合一', '学而时习之', '温故而知新', '学而不厌',
+            '诲人不倦', '发愤忘食', '乐以忘忧', '直面挑战', '永不言败',
+            '越挫越勇', '坚持不懈', '持之以恒', '水滴石穿', '铁杵成针',
+            '积少成多', '聚沙成塔', '千里之行', '始于足下', '山重水复',
+            '柳暗花明', '宝剑锋从', '磨砺出', '梅花香自', '苦寒来',
+            '书山有路', '勤为径', '学海无涯', '苦作舟', '业精于勤',
+            '荒于嬉', '行成于思', '毁于随', '天行健', '君子以自强不息',
+            '地势坤', '君子以厚德载物', '路漫漫其修远兮', '吾将上下而求索',
+            '山不厌高', '海不厌深', '周公吐哺', '天下归心', '老骥伏枥',
+            '志在千里', '烈士暮年', '壮心不已', '穷且益坚', '不坠青云之志',
+            '长风破浪', '会有时', '直挂云帆', '济沧海', '会当凌绝顶',
+            '一览众山小', '宝剑锋从磨砺出', '梅花香自苦寒来', '世上无难事',
+            '只要肯登攀', '千磨万击还坚劲', '任尔东西南北风', '山重水复疑无路',
+            '柳暗花明又一村', '问渠那得清如许', '为有源头活水来', '纸上得来终觉浅',
+            '绝知此事要躬行', '莫愁前路无知己', '天下谁人不识君', '海内存知己',
+            '天涯若比邻', '劝君更尽一杯酒', '西出阳关无故人', '桃花潭水深千尺',
+            '不及汪伦送我情', '春风又绿江南岸', '明月何时照我还', '但愿人长久',
+            '千里共婵娟', '大江东去', '浪淘尽', '千古风流人物', '江山如此多娇',
+            '引无数英雄竞折腰', '数风流人物', '还看今朝', '恰同学少年',
+            '风华正茂', '书生意气', '挥斥方遒', '指点江山', '激扬文字',
+            '粪土当年万户侯', '雄关漫道真如铁', '而今迈步从头越', '红军不怕远征难',
+            '万水千山只等闲', '不到长城非好汉', '屈指行程二万', '宜将剩勇追穷寇',
+            '不可沽名学霸王', '天若有情天亦老', '人间正道是沧桑', '红雨随心翻作浪',
+            '青山着意化为桥', '一万年太久', '只争朝夕', '牢骚太盛防肠断',
+            '风物长宜放眼量', '踏遍青山人未老', '风景这边独好', '天生我材必有用',
+            '千金散尽还复来', '长风破浪会有时', '直挂云帆济沧海', '会当凌绝顶',
+            '一览众山小', '宝剑锋从磨砺出', '梅花香自苦寒来', '书山有路勤为径',
+            '学海无涯苦作舟', '业精于勤荒于嬉', '行成于思毁于随', '天道酬勤',
+            '自强不息', '厚德载物', '志存高远', '勇往直前', '百折不挠',
+            '滴水穿石', '破釜沉舟', '卧薪尝胆', '知行合一', '学而时习之',
+            '温故而知新', '学而不厌', '诲人不倦', '发愤忘食', '乐以忘忧',
+            '直面挑战', '永不言败', '越挫越勇', '坚持不懈', '持之以恒'
+        ];
+        
+        const colors = [
+            '#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FFEAA7',
+            '#DDA0DD', '#98D8C8', '#F7DC6F', '#BB8FCE', '#85C1E9',
+            '#F8C471', '#82E0AA', '#F1948A', '#85C1E9', '#D7BDE2'
+        ];
+        
+        function createBarrage() {
+            const text = motivationalTexts[Math.floor(Math.random() * motivationalTexts.length)];
+            const color = colors[Math.floor(Math.random() * colors.length)];
+            
+            const barrage = document.createElement('div');
+            barrage.className = 'barrage';
+            barrage.textContent = text;
+            barrage.style.color = color;
+            barrage.style.fontSize = (Math.random() * 12 + 16) + 'px';
+            barrage.style.top = Math.random() * 100 + 'vh';
+            barrage.style.animationDuration = (Math.random() * 10 + 10) + 's';
+            barrage.style.opacity = Math.random() * 0.5 + 0.5;
+            
+            container.appendChild(barrage);
+            
+            // 移除弹幕
+            setTimeout(() => {
+                if (barrage.parentNode) {
+                    barrage.parentNode.removeChild(barrage);
+                }
+            }, 20000);
+        }
+        
+        // 持续创建弹幕
+        setInterval(createBarrage, 300);
+        
+        // 初始创建一些弹幕
+        for (let i = 0; i < 20; i++) {
+            setTimeout(createBarrage, i * 200);
+        }
+    </script>
 </body>
 </html>
